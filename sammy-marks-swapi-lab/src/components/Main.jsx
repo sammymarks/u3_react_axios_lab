@@ -11,7 +11,7 @@ import StarshipList from "./categories/StarshipList"
 
 
 export default function Main (props) {
-    console.log("Main Props", props)
+    // console.log("Main Props", props)
     return(
         <div className="Main">
             <h1>This is Main</h1>
@@ -22,7 +22,13 @@ export default function Main (props) {
                     <Route path="/people" element={<PeopleList peopleList={props.peopleList}/>} />
                     <Route path="/planets" element={<PlanetsList planetsList={props.planetsList}/>} />
                     <Route path="/species" element={<SpeciesList speciesList={props.speciesList}/>} />
-                    <Route path="/starships" element={<StarshipList starshipList={props.starshipList}/>} />
+                    <Route path="/starships" element={<StarshipList 
+                        starshipList={props.starshipList} 
+                        setStarshipURL={props.setStarshipURL}
+                        getStarshipsList={props.getStarshipsList}
+                        loadingState={props.loadingState}
+                        />} 
+                    />
                     <Route path="/vehicles" element={<VehiclesList vehiclesList={props.vehiclesList}/>} />
                 </Routes>
             </div>

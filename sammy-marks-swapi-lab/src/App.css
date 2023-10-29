@@ -1,11 +1,99 @@
+body {
+
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.301);
+  border-radius: 10px;
 }
 
-.logo {
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 70vw;
+}
+
+/* ------------- */
+
+.Header {
+  /* display: flex; */
+}
+
+.Header>h1 {
+  color: white;
+  margin: 10px 0px;
+}
+
+.Nav {
+  display: flex;
+  justify-content: center;
+}
+
+.Nav-link {
+  margin: 0px 5px;
+}
+
+
+/* ------------- */
+
+.Main {
+  /* color: white; */
+  overflow: auto;
+}
+
+.Main>h1 {
+  color: white;
+}
+
+.cat-loading {
+  background-color: rgb(216, 101, 101);
+
+  color: white;
+  font-size: large;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.cat-loading>img {
+  max-width: 300px;
+  aspect-ratio: auto;
+}
+
+/* ------------- */
+
+.cat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cat-card {
+  height: 400px;
+  width: 300px;
+  color: white;
+  /* border: white solid 2px; */
+  margin: 10px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.543);
+  border-radius: 10px;
+
+  
+  display: flex;
+  flex-direction: column;
+
+}
+
+.cat-card-header {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -39,4 +127,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */

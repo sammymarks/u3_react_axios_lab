@@ -5,17 +5,22 @@ export default function VehiclesList (props) {
 
     if (props.vehiclesList.length > 0) {
         return(
-            <div className="vehicles-grid">
+            <div className="cat-grid vehicles-grid">
                 {
                     props.vehiclesList.map((vehicle) => (
-                        <div key={vehicle.url}> Model: {vehicle.model} </div>
+                        <div className="cat-card vehicle-card" key={vehicle.url}>
+                            <div className="cat-card-header"> {vehicle.model} </div>
+                        </div>                    
                     ))
                 }
             </div>
         )
     } else {
         return (
-            <div>Waiting for vehicles</div>
+            <div className="cat-loading">
+                <h2>Loading Vehicles</h2>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Diorama_AT-AT.png"/>
+            </div>        
         )
     }
     
