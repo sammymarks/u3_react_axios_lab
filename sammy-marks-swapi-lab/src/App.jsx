@@ -13,7 +13,7 @@ function App() {
   const [filmsList, setFilmsList] = useState([])
   
   const [peopleList, setPeopleList] = useState([])
-  const [peopleResults, setPeopleResults] = useState([])
+  const [peopleLoading, setPeopleLoading] = useState(false)
 
 
 
@@ -30,38 +30,11 @@ function App() {
 //Axios functions
   const getStarshipsList = async() => {
     //----WORKING SINGLE PAGE PULL----
-
-    const starshipPage1 = await axios.get(starshipURL)
-    setStarshipList(starshipPage1.data)
+    setStarshipList([])
+    const starshipPage = await axios.get(starshipURL)
+    setStarshipList(starshipPage.data)
     
-    //----END WORKING SINGLE PAGE PULL----
-    
-    //----RECURSIVE PULL----
-
-    // const swapiGetCategory = async (url) => {
-    //   // console.log('url', url)
-    //   const response = await axios.get(url)
-    //   console.log(url, response.data.results)
-
-    //   setStarshipNext(response.data.results)
-    //   //starshipResults is an empty array []
-    //   //response.data.results is an array of objects [{},{},{},...]
-
-    //   setStarshipResults([...starshipResults, ...starshipNext])
-    //   // setStarshipResults([...starshipResults,response.data.results])
-    //   if (response.data.next) {
-    //     swapiGetCategory(response.data.next)
-    //   }
-    // }
-    
-    // swapiGetCategory(`${BASE_URL}starships/`)
-    // setStarshipList(starshipResults)
-    
-    //----END RECURSIVE PULL----
-
   }
-
-
 
   useEffect(() => {
     setLoadingState(true)
@@ -74,22 +47,28 @@ function App() {
 
     //People
     const getPeopleList = async() => {
-      // const peoplePage1 = await axios.get(`${BASE_URL}people/`)
-      // setPeopleList(peoplePage1.data.results)
-
+      const allPeople = []
+      
       const swapiGetCategory = async (url) => {
         const response = await axios.get(url)
         console.log(url, response.data.results)
-        setPeopleList( pizza => [...pizza,...response.data.results])
+        allPeople.push(...response.data.results)
         if (response.data.next) {
           swapiGetCategory(response.data.next)
+        } else {
+          setPeopleLoading(false)
         }
+        console.log("allPeople", allPeople)
+        // setPeopleList(allPeople)
       }
 
       swapiGetCategory(`${BASE_URL}people/`)
-      // setPeopleList(peopleList)
+      // console.log("allPeople", allPeople)
+      setPeopleList(allPeople)
+
+
     }
-    getPeopleList()
+    // getPeopleList().then(setLoadingState(false))
 
     //Planets
     const getPlanetsList = async() => {
@@ -116,9 +95,9 @@ function App() {
       setVehiclesList(vehiclesPage1.data.results)
     }
     getVehiclesList()
-
+    
     //Hide loading state
-    setLoadingState(false)
+    
 
   },[starshipURL])
 
@@ -129,15 +108,22 @@ function App() {
     <div className='App'>
       <Header />
       <Main 
-      filmsList={filmsList}
-      peopleList={peopleList}
-      planetsList={planetsList}
-      speciesList={speciesList}
-      starshipList={starshipList}
-      setStarshipURL={setStarshipURL}
-      getStarshipsList={getStarshipsList}
-      loadingState={loadingState}
-      vehiclesList={vehiclesList}
+        loadingState={loadingState}
+        
+        filmsList={filmsList}
+
+        peopleList={peopleList}
+        peopleLoading={peopleLoading}
+
+        planetsList={planetsList}
+        speciesList={speciesList}
+        
+        starshipList={starshipList}
+        setStarshipURL={setStarshipURL}
+        getStarshipsList={getStarshipsList}
+        
+
+        vehiclesList={vehiclesList}
       />
     </div>
     )

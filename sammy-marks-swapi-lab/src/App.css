@@ -73,7 +73,7 @@ body {
 }
 
 .cat-card {
-  height: 400px;
+  height: 100px;
   width: 300px;
   color: white;
   /* border: white solid 2px; */
@@ -85,12 +85,21 @@ body {
   
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
 }
 
 .cat-card-header {
   font-size: 1.6rem;
   font-weight: bold;
+}
+
+.detail-container {
+  color: white;
+}
+
+.detail-container>ul {
+  list-style: none;
 }
 
 /* .logo {

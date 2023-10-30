@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom"
 
 
 export default function StarshipList (props) {
@@ -8,20 +9,21 @@ export default function StarshipList (props) {
     const previousURL = props.starshipList.previous
     // console.log("results", results)
 
-    // const getButtons = (previous, next) {
-    //     let HTMLstring = new String
-    //     if (previous) {HTMLstring.concat()
-            
-    //     }
-    // }
+
 
     const handleClick = (url) => {
         props.setStarshipURL(url)
     }
 
+    let navigate = useNavigate()
+
+    const showCard = (item) => {
+        navigate(`${item.name}`)
+    }
+
     return (
 
-        props.loadingState ? 
+        !results ? 
         <div className="cat-loading">
             <h2>Loading Ships</h2>
             <img src="https://upload.wikimedia.org/wikipedia/en/d/d9/ImperialstarDestroyer480ppx.png"/>
@@ -31,7 +33,7 @@ export default function StarshipList (props) {
                 <div className="cat-grid starship-grid">
                     {
                         results?.map((ship) => (
-                            <div className="cat-card film-card" key={ship.url}>
+                            <div className="cat-card film-card" key={ship.name} onClick={() => showCard(ship)}>
                                 <div className="cat-card-header"> {ship.model} </div>
                             </div>                    
                         ))
